@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-sm bg-color-change navbar-dark">
+    <ng-content></ng-content>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="!loggedIn?'container':''">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="/"><img class="" src="../../../assets/logoMSAU.png" height="50px"
+                    width="50px" />MSAU
+            </a>
+        </div>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/">Home</a>
+            </li>
+            <li *ngIf="loggedIn" class="nav-item active">
+                <a class="nav-link" routerLink="/onboardees">Dashboard</a>
+            </li>
+            <li *ngIf="!loggedIn" class="nav-item active">
+                <a class="nav-link" routerLink="/login">Sign In</a>
+            </li>
+            <li *ngIf="loggedIn" class="nav-item active">
+                <a class="nav-link" routerLink="/login" (click)="logOut()">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>

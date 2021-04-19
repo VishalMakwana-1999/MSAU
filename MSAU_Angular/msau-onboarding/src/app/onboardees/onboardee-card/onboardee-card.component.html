@@ -1,0 +1,9 @@
+<div *ngIf="onboardee" class="thumbnail card" routerLink="/onboardees/{{onboardee.id}}" style="cursor: pointer;">
+    <div class="caption card-body">
+        <h4 class="group card-title inner list-group-item-heading">
+            <i class="fa fa-user-circle-o"></i> {{onboardee.name}}
+        </h4>
+        <p class="group inner list-group-item-text">{{onboardee.email}}</p>
+
+    </div>
+</div>

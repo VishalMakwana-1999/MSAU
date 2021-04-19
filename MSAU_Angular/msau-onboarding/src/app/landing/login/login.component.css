@@ -1,0 +1,26 @@
+.login-card-container{
+    margin-top: 10%;
+    height: 300px;
+}
+.card{
+    
+    border: 1px solid #173f5f;
+}
+.bg-color-change{
+    background-color: #173f5f;
+}
+.fa {
+    font-size: 30px;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  .fa-google {
+    background: #dd4b39;
+    color: white;
+  }
+.btn{
+    line-height: normal;
+}

@@ -1,0 +1,54 @@
+<div class="d-flex" id="wrapper" [ngClass]="toggle==true?'toggled':''">
+
+    <div class="bg-light border-right" id="sidebar-wrapper">
+
+        <div class="sidebar-heading text-center" style="height: 76px; line-height: 3;">
+
+            Dashboard
+
+        </div>
+
+        <div class="list-group list-group-flush">
+
+            <a href="#" class="list-group-item list-group-item-action"
+                [ngClass]="url=='oppmanage'?'bg-color-change text-white':'bg-light'">Opportunity Management</a>
+            <a href="#" class="list-group-item list-group-item-action"
+                [ngClass]="url=='candmanage'?'bg-color-change text-white':'bg-light'">Candidate Management</a>
+            <a href="#" class="list-group-item list-group-item-action"
+                [ngClass]="url=='coursemanage'?'bg-color-change text-white':'bg-light'">Course Management</a>
+            <a href="#" class="list-group-item list-group-item-action"
+                [ngClass]="url=='assessments'?'bg-color-change text-white':'bg-light'">Assessments</a>
+            <a routerLink="/onboardees" class="list-group-item list-group-item-action"
+                [ngClass]="url=='onboardees'?'bg-color-change text-white':'bg-light'">Onboarding Portal</a>
+
+        </div>
+
+    </div>
+
+    <div id="page-content-wrapper">
+
+        <app-navbar>
+
+            <a class="btn bg-color-change" id="menu-toggle" (click)="toggleMenu()" aria-label="Skip to main navigation">
+                <i class="fa fa-bars text-white" aria-hidden="true"></i>
+            </a>
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars text-white" aria-hidden="true"></i>
+            </button>
+
+        </app-navbar>
+
+        <div class="container">
+
+            <div class="mt-5">
+                <ng-content>
+
+                </ng-content>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
