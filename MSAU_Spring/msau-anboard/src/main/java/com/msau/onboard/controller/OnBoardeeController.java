@@ -30,4 +30,5 @@ public class OnBoardeeController {
     public HashMap<String,String> deleteOnBoardee(@PathVariable("id") int id){
         return onBoardeeRepository.deleteOnBoardee(id);
     }
+
 }
