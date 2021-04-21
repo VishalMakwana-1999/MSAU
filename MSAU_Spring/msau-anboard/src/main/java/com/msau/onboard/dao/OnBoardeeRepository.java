@@ -2,6 +2,7 @@ package com.msau.onboard.dao;
 
 import com.msau.onboard.entity.OnBoardee;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface OnBoardeeRepository {
@@ -9,5 +10,5 @@ public interface OnBoardeeRepository {
     OnBoardee updateOnBoardee(OnBoardee onBoardee);
     OnBoardee getOnBoardeebyId(int DemandId);
     List<OnBoardee> getOnBoardees();
-    OnBoardee deleteOnBoardee();
+    HashMap<String,String> deleteOnBoardee(int DemandId);
 }

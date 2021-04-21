@@ -23,6 +23,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     private static final String SELECT_EVERY_ROW="Select * from onboardee as o,msmanager as m where o.managerId=m.managerId";
     private static final String str="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId where o.active=1";
     private static final String SELECT_BY_ID="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId and o.demandId=";
+    private static final String DELETE_BY_ID="UPDATE onboardee set active=0 where demandId=?";
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
@@ -139,8 +140,12 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     }
 
     @Override
-    public OnBoardee deleteOnBoardee() {
-        return null;
+    public HashMap<String,String> deleteOnBoardee(int DemandId) {
+        HashMap<String, String> map = new HashMap<>();
+        jdbcTemplate.update(DELETE_BY_ID,DemandId);
+        map.put("status", "200");
+        map.put("message", "Onboardee Deleted");
+        return map;
     }
 
 }

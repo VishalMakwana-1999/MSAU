@@ -5,6 +5,7 @@ import com.msau.onboard.entity.OnBoardee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -12,7 +13,7 @@ public class OnBoardeeController {
     @Autowired
     OnBoardeeRepository onBoardeeRepository;
 
-    @GetMapping("/fetch_onboardees")
+    @GetMapping("/api/fetch_onboardees")
     public List<OnBoardee> getOnBoardees(){
         return onBoardeeRepository.getOnBoardees();
     }
@@ -20,8 +21,13 @@ public class OnBoardeeController {
     public OnBoardee updateOnBoardee(@RequestBody OnBoardee onBoardee){
         return onBoardeeRepository.updateOnBoardee(onBoardee);
     }
-    @GetMapping("/fetch_onboardees/{id}")
+    @GetMapping("/api/fetch_onboardees/{id}")
     public OnBoardee getOnBoardeebyId(@PathVariable("id") int id){
         return onBoardeeRepository.getOnBoardeebyId(id);
+    }
+
+    @GetMapping("/api/delete/{id}")
+    public HashMap<String,String> deleteOnBoardee(@PathVariable("id") int id){
+        return onBoardeeRepository.deleteOnBoardee(id);
     }
 }

@@ -10,9 +10,12 @@ export class OnboardeeService {
   constructor(private http: HttpClient) { }
 
   fetchOnboardees(): any {
-    return this.http.get("/fetch_onboardees")
+    return this.http.get("/api/fetch_onboardees")
   }
   fetchOnboardees_byId(id: number): any {
-    return this.http.get(`/fetch_onboardees/${id}`)
+    return this.http.get(`/api/fetch_onboardees/${id}`)
+  }
+  deleteOnboardee_byId(id: number): any {
+    return this.http.get(`/api/delete/${id}`)
   }
 }

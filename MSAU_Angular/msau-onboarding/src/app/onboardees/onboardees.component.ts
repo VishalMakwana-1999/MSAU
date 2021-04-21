@@ -30,6 +30,10 @@ export class OnboardeesComponent implements OnInit {
 
   ]
   ngOnInit(): void {
+    this.init()
+
+  }
+  init(): void {
     if (this.loginService.alreadyLoggedIn()) {
       this.user != this.loginService.alreadyLoggedIn();
       this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
@@ -40,6 +44,25 @@ export class OnboardeesComponent implements OnInit {
     else {
       this.router.navigate(['login'])
     }
+  }
+  update(): void {
+    if (this.loginService.alreadyLoggedIn()) {
+      this.user != this.loginService.alreadyLoggedIn();
+      this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
+        this.onboardee_list = data;
+        console.log(data)
+      })
+    }
+    else {
+      this.router.navigate(['login'])
+    }
+  }
+  deleteById(id: number): any {
+    this.onboardee_list = [];
+    this.onboardeeService.deleteOnboardee_byId(id).subscribe((data: any) => {
+      console.log(data)
+      this.update()
+    });
 
   }
 
