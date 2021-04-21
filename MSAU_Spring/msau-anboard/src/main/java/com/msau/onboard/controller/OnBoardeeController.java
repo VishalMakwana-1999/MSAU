@@ -12,7 +12,7 @@ public class OnBoardeeController {
     @Autowired
     OnBoardeeRepository onBoardeeRepository;
 
-    @GetMapping("/onboardees")
+    @GetMapping("/fetch_onboardees")
     public List<OnBoardee> getOnBoardees(){
         return onBoardeeRepository.getOnBoardees();
     }
@@ -20,7 +20,7 @@ public class OnBoardeeController {
     public OnBoardee updateOnBoardee(@RequestBody OnBoardee onBoardee){
         return onBoardeeRepository.updateOnBoardee(onBoardee);
     }
-    @GetMapping("/onboardees/{id}")
+    @GetMapping("/fetch_onboardees/{id}")
     public OnBoardee getOnBoardeebyId(@PathVariable("id") int id){
         return onBoardeeRepository.getOnBoardeebyId(id);
     }

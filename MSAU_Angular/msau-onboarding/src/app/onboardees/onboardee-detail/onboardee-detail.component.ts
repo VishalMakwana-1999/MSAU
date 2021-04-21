@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
+import { OnboardeeService } from '../onboardee.service';
 @Component({
   selector: 'app-onboardee-detail',
   templateUrl: './onboardee-detail.component.html',
@@ -7,7 +8,7 @@ import { Router } from "@angular/router"
 })
 export class OnboardeeDetailComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private onboardeeService: OnboardeeService) { }
   id: string = "";
   onboardee: any;
   onboardees = [
@@ -30,10 +31,8 @@ export class OnboardeeDetailComponent implements OnInit {
   ]
   ngOnInit(): void {
     this.id = this.router.url.split("/")[2]
-    this.onboardees.map(item => {
-      if (item.id == parseInt(this.id)) {
-        this.onboardee = item
-      }
+    this.onboardeeService.fetchOnboardees_byId(parseInt(this.id)).subscribe((data: any) => {
+      this.onboardee = data;
     })
   }
 }

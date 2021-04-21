@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
+import { LoginService } from '../core/login/login.service';
+import { OnboardeeService } from './onboardee.service';
 @Component({
   selector: 'app-onboardees',
   templateUrl: './onboardees.component.html',
@@ -7,7 +9,8 @@ import { Router } from "@angular/router"
 })
 export class OnboardeesComponent implements OnInit {
   user: String = ""
-  constructor(private router: Router) { }
+  onboardee_list: any;
+  constructor(private router: Router, private loginService: LoginService, private onboardeeService: OnboardeeService) { }
   onboardees = [
     {
       id: 1,
@@ -27,12 +30,18 @@ export class OnboardeesComponent implements OnInit {
 
   ]
   ngOnInit(): void {
-    if (localStorage.getItem("user")) {
-      this.user != localStorage.getItem("user");
+    if (this.loginService.alreadyLoggedIn()) {
+      this.user != this.loginService.alreadyLoggedIn();
+      this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
+        this.onboardee_list = data;
+        console.log(data)
+      })
     }
     else {
       this.router.navigate(['login'])
     }
+
   }
+
 
 }

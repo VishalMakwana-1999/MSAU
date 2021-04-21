@@ -1,5 +1,8 @@
 <app-sidebar>
     <div class="input-group d-flex">
+        <h3 class="text-color-change">Onboardees</h3>
+    </div>
+    <div class="input-group d-flex mt-3">
         <div class="form-outline" style="border-radius: 0;">
             <input type="search" id="form1" class="form-control" placeholder="Search" />
         </div>
@@ -7,9 +10,31 @@
             <i class="fa fa-search"></i>
         </button>
     </div>
-
+    <i *ngIf="!onboardee_list" class="spinner-border"></i>
+    <table class="table table-hover table-condensed text-color-change mt-3" id="dev-table">
+        <thead class="table-tr-shadow">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let onboardee of onboardee_list" routerLink="/onboardees/{{onboardee.demandId}}">
+            <td><i class="fa fa-user-circle-o"></i></td>
+            <td>{{onboardee.fname}} {{onboardee.lname}}</td>
+            <td>{{onboardee.email}}</td>
+            <td>{{onboardee.location}}</td>
+            <td>{{onboardee.onboardStatus==0?'Idle':onboardee.onboardStatus==1?'In Process':'Completed'}}</td>
+            <td><i class="fa fa-info-circle cursor-pointer"></i></td>
+            <td><i class="fa fa-trash"></i></td>
+        </tr>
+    </table>
     <div id="products" class="row view-group mt-5">
-        <div *ngFor="let onboardee of onboardees;" class="item col-xs-4 col-lg-4 grid-group-item">
+        <div *ngFor="let onboardee of onboardee_list;" class="item col-xs-4 col-lg-4 grid-group-item">
 
             <app-onboardee-card [onboardee]="onboardee"></app-onboardee-card>
 

@@ -1,4 +1,6 @@
 <app-sidebar>
     <h1>Inside Detail</h1>
-    <h3 *ngIf="onboardee">{{onboardee.name}}</h3>
+
+    <i *ngIf="!onboardee" class="spinner-border"></i>
+    <h3 *ngIf="onboardee">{{onboardee.fname}} {{onboardee.lname}}</h3>
 </app-sidebar>

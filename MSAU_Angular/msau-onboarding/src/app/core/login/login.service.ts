@@ -9,15 +9,15 @@ export class LoginService {
   loggedIn: boolean = false;
   constructor(private authService: SocialAuthService) { }
   alreadyLoggedIn(): any {
-    this.authService.authState.subscribe(user => {
-      this.user = user;
-      this.loggedIn = (user != null);
-    })
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+    return false;
   }
   signInWithGoogle(): any {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
       console.log(res);
-      localStorage.setItem("user", res.email);
+      localStorage.setItem("token", res.idToken);
     })
   }
   signOut(): any {

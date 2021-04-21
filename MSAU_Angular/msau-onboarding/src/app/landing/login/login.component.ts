@@ -12,12 +12,12 @@ export class LoginComponent implements OnInit {
   loggedIn: boolean = false;
   constructor(private authService: SocialAuthService, private router: Router, private loginService: LoginService) { }
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
+    if (this.loginService.alreadyLoggedIn()) {
       this.router.navigate(['onboardees'])
     }
   }
   ngDoCheck(): void {
-    if (localStorage.getItem('user')) {
+    if (this.loginService.alreadyLoggedIn()) {
       this.router.navigate(['onboardees'])
     }
   }

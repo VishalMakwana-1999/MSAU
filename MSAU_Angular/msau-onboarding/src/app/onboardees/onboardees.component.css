@@ -2,3 +2,34 @@
     background-color: #173f5f;
     color: white;
 }
+.text-color-change{
+    color: #173f5f;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.table td, .table th {
+    border: none
+
+}
+.table th{
+    border-bottom: 0.5px solid #173f5f;
+}
+table.table.table-condensed {
+    border: 0.5px solid #173f5f;
+}
+thead tr{
+    box-shadow: none !important;
+}
+tr:hover { box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.5); cursor: pointer; }
+
+.spinner-border{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    color: #173f5f;
+}

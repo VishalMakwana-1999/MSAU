@@ -9,4 +9,5 @@ public interface OnBoardeeRepository {
     OnBoardee updateOnBoardee(OnBoardee onBoardee);
     OnBoardee getOnBoardeebyId(int DemandId);
     List<OnBoardee> getOnBoardees();
+    OnBoardee deleteOnBoardee();
 }
