@@ -17,7 +17,7 @@ public class OnBoardeeController {
     public List<OnBoardee> getOnBoardees(){
         return onBoardeeRepository.getOnBoardees();
     }
-    @PostMapping("/update")
+    @PostMapping("/api/update")
     public OnBoardee updateOnBoardee(@RequestBody OnBoardee onBoardee){
         return onBoardeeRepository.updateOnBoardee(onBoardee);
     }
@@ -27,8 +27,11 @@ public class OnBoardeeController {
     }
 
     @GetMapping("/api/delete/{id}")
-    public HashMap<String,String> deleteOnBoardee(@PathVariable("id") int id){
+    public HashMap<String,Object> deleteOnBoardee(@PathVariable("id") int id){
         return onBoardeeRepository.deleteOnBoardee(id);
     }
-
+    @PostMapping("/api/create")
+    public HashMap<String,Object> saveOnboardee(@RequestBody OnBoardee onBoardee){
+        return onBoardeeRepository.saveOnBoardee(onBoardee);
+    }
 }

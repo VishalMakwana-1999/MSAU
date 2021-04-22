@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface OnBoardeeRepository {
-    OnBoardee saveOnBoardee(OnBoardee onBoardee);
+    HashMap<String,Object> saveOnBoardee(OnBoardee onBoardee);
     OnBoardee updateOnBoardee(OnBoardee onBoardee);
     OnBoardee getOnBoardeebyId(int DemandId);
     List<OnBoardee> getOnBoardees();
-    HashMap<String,String> deleteOnBoardee(int DemandId);
+    HashMap<String,Object> deleteOnBoardee(int DemandId);
 }

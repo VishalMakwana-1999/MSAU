@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -27,8 +28,27 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
-    public OnBoardee saveOnBoardee(OnBoardee onBoardee) {
-        return null;
+    public HashMap<String,Object> saveOnBoardee(OnBoardee onBoardee) {
+        jdbcTemplate.update("INSERT into onboardee (fname,lname,startDate,bgcStatus,managerId,location,etaCompletion,email,dob,onBoardStatus)" +
+               "VALUES (?,?,?,?,?,?,?,?,?,?)",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId()
+        ,onBoardee.getLocation(),onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus());
+        List<Skill> skillList=onBoardee.getSkills().getSkillList();
+        System.out.println(skillList);
+        int rown=0;
+        rown=jdbcTemplate.queryForObject("SELECT MAX(demandId) as demandId from onboardee", new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int i) throws SQLException {
+                return rs.getInt("demandId");
+            }
+        });
+        System.out.println(rown);
+        for(int i=0;i<skillList.size();i++){
+            Skill s= skillList.get(i);
+            jdbcTemplate.update("INSERT into onboardskill (demandId,skillName,level) VALUES (?,?,?)",rown,s.getSkillName(),s.getLevel());
+        }
+        HashMap<String,Object> map=new HashMap();
+        map.put("Inside","save");
+        return map;
     }
 
     @Override
@@ -140,10 +160,10 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     }
 
     @Override
-    public HashMap<String,String> deleteOnBoardee(int DemandId) {
-        HashMap<String, String> map = new HashMap<>();
+    public HashMap<String,Object> deleteOnBoardee(int DemandId) {
+        HashMap<String, Object> map = new HashMap<>();
         jdbcTemplate.update(DELETE_BY_ID,DemandId);
-        map.put("status", "200");
+        map.put("status", 200);
         map.put("message", "Onboardee Deleted");
         return map;
     }
