@@ -1,6 +1,7 @@
 package com.msau.onboard.controller;
 
 import com.msau.onboard.dao.OnBoardeeRepository;
+import com.msau.onboard.entity.MSManager;
 import com.msau.onboard.entity.OnBoardee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,9 @@ public class OnBoardeeController {
     @PostMapping("/api/create")
     public HashMap<String,Object> saveOnboardee(@RequestBody OnBoardee onBoardee){
         return onBoardeeRepository.saveOnBoardee(onBoardee);
+    }
+    @GetMapping("/api/fetch_managers")
+    public List<MSManager> fetchManagers(){
+        return onBoardeeRepository.fetchManagers();
     }
 }

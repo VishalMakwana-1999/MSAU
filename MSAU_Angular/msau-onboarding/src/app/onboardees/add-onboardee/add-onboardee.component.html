@@ -1,0 +1,119 @@
+<app-sidebar>
+    <form [formGroup]="onboardeeForm" (ngSubmit)="onSubmit()">
+        <div class="register-form">
+            <div class="form">
+                <div class="note">
+                    <p>Add Onboardee</p>
+                </div>
+
+                <div class="form-content text-color-change">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="Enter First Name"
+                                    formControlName="fname" />
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Enter Last Name"
+                                    formControlName="lname" />
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" type="email" placeholder="Enter email"
+                                    formControlName="email" />
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input class="form-control" type="number" placeholder="Enter number"
+                                    formControlName="phone" />
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input class="form-control" type="date" placeholder="Enter DOB" formControlName="dob" />
+                            </div>
+                            <div class="form-group">
+                                <label>Onboarding Start Date</label>
+                                <input class="form-control" type="date" placeholder="Enter Date"
+                                    formControlName="startDate" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input class="form-control" type="text" placeholder="Enter Location"
+                                    formControlName="location" />
+                            </div>
+                            <div class="form-group">
+                                <label>Manager</label>
+                                <select class="form-control" formControlName="managerId">
+                                    <option *ngFor="let man of managers" value="{{man.managerId}}"> {{man.managerFName}}
+                                        {{man.managerLName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Background Check Status</label>
+                                <select class="form-control" formControlName="bgcStatus">
+                                    <option *ngFor="let status of bgcStatus"> {{status}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Onboarding Status</label>
+                                <select class="form-control" formControlName="onboardStatus">
+                                    <option *ngFor="let status of onboardStatus"> {{status}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Estimated Date of Onboarding</label>
+                                <input class="form-control" type="date" placeholder="Enter Date"
+                                    formControlName="etaCompletion" />
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Skills</h3> <span class="btn bg-color-change" (click)="addSkills(); addSkillLevel()">Add
+                        Skills</span>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div formArrayName="skills">
+
+                                <div *ngFor="let skill of skills.controls; let i=index" class="form-group">
+                                    <label>
+                                        Skill:
+                                    </label>
+                                    <input class="form-control" type="text" [formControlName]="i">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div formArrayName="skillLevel">
+                                <div *ngFor="let level of skillLevel.controls; let i=index" class="form-group">
+                                    <label>
+                                        Level:
+                                    </label>
+                                    <select class="form-control" [formControlName]="i">
+                                        <option *ngFor="let level of levels"> {{level}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" [disabled]="!onboardeeForm.valid" [attr.class]="!onboardeeForm.valid?'not-valid btn bg-color-change mx-auto btnSubmit'
+                        :'btn bg-color-change mx-auto btnSubmit'">Add</button>
+
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+
+</app-sidebar>

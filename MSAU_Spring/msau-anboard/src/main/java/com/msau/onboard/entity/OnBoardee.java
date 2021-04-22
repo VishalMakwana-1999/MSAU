@@ -12,13 +12,13 @@ public class OnBoardee {
     private String fname;
     private String lname;
     private String startDate;
-    private int bgcStatus;
+    private String bgcStatus;
     private int managerId;
     private String location;
-    private int etaCompletion;
+    private String etaCompletion;
     private String email;
     private String dob;
-    private int onboardStatus;
+    private String onboardStatus;
     MSManager manager;
     Skills skills;
 }

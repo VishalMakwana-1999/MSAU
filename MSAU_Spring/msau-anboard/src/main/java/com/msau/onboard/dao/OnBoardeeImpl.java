@@ -25,6 +25,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     private static final String str="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId where o.active=1";
     private static final String SELECT_BY_ID="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId and o.demandId=";
     private static final String DELETE_BY_ID="UPDATE onboardee set active=0 where demandId=?";
+    private static final String FETCH_MANAGERS="SELECT * from msmanager";
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
@@ -47,7 +48,8 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
             jdbcTemplate.update("INSERT into onboardskill (demandId,skillName,level) VALUES (?,?,?)",rown,s.getSkillName(),s.getLevel());
         }
         HashMap<String,Object> map=new HashMap();
-        map.put("Inside","save");
+        map.put("Status",200);
+        map.put("Message","Onboardee Added");
         return map;
     }
 
@@ -75,14 +77,14 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
                         onBoardee.setFname(rs.getString("fname"));
                         onBoardee.setLname(rs.getString("lname"));
                         onBoardee.setStartDate(rs.getString("startDate"));
-                        onBoardee.setBgcStatus(rs.getInt("bgcStatus"));
+                        onBoardee.setBgcStatus(rs.getString("bgcStatus"));
                         onBoardee.setManagerId(rs.getInt("managerId"));
                         onBoardee.setManager(new MSManager(rs.getInt("managerId"), rs.getString("managerFName"), rs.getString("managerLName")));
                         onBoardee.setLocation(rs.getString("location"));
-                        onBoardee.setEtaCompletion(rs.getInt("etaCompletion"));
+                        onBoardee.setEtaCompletion(rs.getString("etaCompletion"));
                         onBoardee.setEmail(rs.getString("email"));
                         onBoardee.setDob(rs.getString("dob"));
-                        onBoardee.setOnboardStatus(rs.getInt("onboardStatus"));
+                        onBoardee.setOnboardStatus(rs.getString("onboardStatus"));
                     }
                     Integer id = rs.getInt("id");
                     Skill skill = skillKeyskillMap.get(id);
@@ -127,14 +129,14 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
                         onBoardee.setFname(rs.getString("fname"));
                         onBoardee.setLname(rs.getString("lname"));
                         onBoardee.setStartDate(rs.getString("startDate"));
-                        onBoardee.setBgcStatus(rs.getInt("bgcStatus"));
+                        onBoardee.setBgcStatus(rs.getString("bgcStatus"));
                         onBoardee.setManagerId(rs.getInt("managerId"));
                         onBoardee.setManager(new MSManager(rs.getInt("managerId"), rs.getString("managerFName"), rs.getString("managerLName")));
                         onBoardee.setLocation(rs.getString("location"));
-                        onBoardee.setEtaCompletion(rs.getInt("etaCompletion"));
+                        onBoardee.setEtaCompletion(rs.getString("etaCompletion"));
                         onBoardee.setEmail(rs.getString("email"));
                         onBoardee.setDob(rs.getString("dob"));
-                        onBoardee.setOnboardStatus(rs.getInt("onboardStatus"));
+                        onBoardee.setOnboardStatus(rs.getString("onboardStatus"));
                     }
                     Integer id = rs.getInt("id");
                     Skill skill = skillKeyskillMap.get(id);
@@ -166,6 +168,13 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
         map.put("status", 200);
         map.put("message", "Onboardee Deleted");
         return map;
+    }
+
+    @Override
+    public List<MSManager> fetchManagers() {
+        return jdbcTemplate.query(FETCH_MANAGERS,(rs,rown)->{
+            return new MSManager(rs.getInt("managerId"),rs.getString("ManagerFname"), rs.getString("managerLname"));
+        });
     }
 
 }

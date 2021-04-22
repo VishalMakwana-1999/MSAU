@@ -9,12 +9,13 @@ import { LoginComponent } from './landing/login/login.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from "angularx-social-login"
 import { GoogleLoginProvider } from "angularx-social-login"
 import { HttpClientModule } from "@angular/common/http"
-import { FormsModule } from "@angular/forms"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { LoginService } from "./core/login/login.service";
 import { OnboardeesComponent } from './onboardees/onboardees.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { OnboardeeDetailComponent } from './onboardees/onboardee-detail/onboardee-detail.component';
 import { OnboardeeCardComponent } from './onboardees/onboardee-card/onboardee-card.component';
+import { AddOnboardeeComponent } from './onboardees/add-onboardee/add-onboardee.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { OnboardeeCardComponent } from './onboardees/onboardee-card/onboardee-ca
     SidebarComponent,
     OnboardeeDetailComponent,
     OnboardeeCardComponent,
+    AddOnboardeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import { OnboardeeCardComponent } from './onboardees/onboardee-card/onboardee-ca
     SocialLoginModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

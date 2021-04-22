@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class MSManager {
     private int managerId;
     private String managerFName;
-    private String managerLname;
+    private String managerLName;
 }

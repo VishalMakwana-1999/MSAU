@@ -1,5 +1,6 @@
 package com.msau.onboard.dao;
 
+import com.msau.onboard.entity.MSManager;
 import com.msau.onboard.entity.OnBoardee;
 
 import java.util.HashMap;
@@ -11,4 +12,5 @@ public interface OnBoardeeRepository {
     OnBoardee getOnBoardeebyId(int DemandId);
     List<OnBoardee> getOnBoardees();
     HashMap<String,Object> deleteOnBoardee(int DemandId);
+    List<MSManager> fetchManagers();
 }

@@ -2,13 +2,19 @@
     <div class="input-group d-flex">
         <h3 class="text-color-change">Onboardees</h3>
     </div>
-    <div class="input-group d-flex mt-3">
-        <div class="form-outline" style="border-radius: 0;">
-            <input type="search" id="form1" class="form-control" placeholder="Search" />
+    <div class="d-flex mt-3">
+        <div class="input-group d-flex">
+            <div class="form-outline" style="border-radius: 0;">
+                <input type="search" id="form1" class="form-control" placeholder="Search" />
+            </div>
+            <button type="button" class="btn bg-color-change">
+                <i class="fa fa-search"></i>
+            </button>
         </div>
-        <button type="button" class="btn bg-color-change">
-            <i class="fa fa-search"></i>
-        </button>
+        <div style="float: right;">
+            <button type="button" class="btn bg-color-change" routerLink="/onboardees/create"><i
+                    class="fa fa-plus-circle"></i></button>
+        </div>
     </div>
     <i *ngIf="!onboardee_list" class="spinner-border"></i>
     <table class="table table-hover table-condensed text-color-change mt-3" id="dev-table">
@@ -28,7 +34,7 @@
             <td>{{onboardee.fname}} {{onboardee.lname}}</td>
             <td>{{onboardee.email}}</td>
             <td>{{onboardee.location}}</td>
-            <td>{{onboardee.onboardStatus==0?'Idle':onboardee.onboardStatus==1?'In Process':'Completed'}}</td>
+            <td>{{onboardee.onboardStatus}}</td>
             <td routerLink="/onboardees/{{onboardee.demandId}}"><i class="fa fa-info-circle cursor-pointer"></i></td>
             <td data-toggle="modal" [attr.data-target]="'#exampleModal' + onboardee.demandId"><i
                     class="fa fa-trash"></i></td>
