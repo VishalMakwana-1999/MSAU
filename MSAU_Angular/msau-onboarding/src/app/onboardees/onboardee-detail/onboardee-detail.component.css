@@ -1,10 +1,60 @@
-.spinner-border{
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    top: 50%;
-    left: 50%;
-    margin-left: -50px;
-    margin-top: -50px;
+.text-color-change{
     color: #173f5f;
+}
+.bg-color-change{
+    background-color: #173f5f !important; 
+    color: white !important;
+}
+a:link {
+    text-decoration: none;
+  }
+.border-red{
+  border: 1px solid red;
+}
+
+
+input.ng-touched.ng-invalid {
+  border:1px solid red;
+}
+
+.spinner-border{
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  color: #173f5f;
+}
+  .note {
+    text-align: center;
+    height: 80px;
+    background: linear-gradient(to right, #454ea0, #173f5f);
+    color: #fff;
+    font-weight: bold;
+    line-height: 80px;
+  }
+
+  .form-content {
+    padding: 5%;
+    border: 1px solid #ced4da;
+    margin-bottom: 2%;
+  }
+
+  .form-control {
+    border-radius: 1.5rem;
+  }
+
+  .btnSubmit {
+    margin-top: 2%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 100%;
+    cursor: pointer;
+  }
+
+.not-valid{
+    cursor: no-drop;
 }

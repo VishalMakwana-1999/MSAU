@@ -10,11 +10,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>First Name</label>
+                                <label>First Name
+                                </label>
                                 <input class="form-control" type="text" placeholder="Enter First Name"
                                     formControlName="fname" />
                             </div>
-                            <div class="form-group">
+                            <div class=" form-group">
                                 <label>Last Name</label>
                                 <input class="form-control" type="text" placeholder="Enter Last Name"
                                     formControlName="lname" />
@@ -48,6 +49,7 @@
                             <div class="form-group">
                                 <label>Manager</label>
                                 <select class="form-control" formControlName="managerId">
+                                    <option selected disabled>Select Manager</option>
                                     <option *ngFor="let man of managers" value="{{man.managerId}}"> {{man.managerFName}}
                                         {{man.managerLName}}
                                     </option>
@@ -56,14 +58,18 @@
                             <div class="form-group">
                                 <label>Background Check Status</label>
                                 <select class="form-control" formControlName="bgcStatus">
-                                    <option *ngFor="let status of bgcStatus"> {{status}}
+                                    <option selected>Select status</option>
+                                    <option *ngFor="let status of bgcStatus">
+                                        {{status}}
                                     </option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Onboarding Status</label>
                                 <select class="form-control" formControlName="onboardStatus">
-                                    <option *ngFor="let status of onboardStatus"> {{status}}
+                                    <option selected>Select status</option>
+                                    <option *ngFor="let status of onboardStatus">
+                                        {{status}}
                                     </option>
                                 </select>
                             </div>
@@ -95,7 +101,8 @@
                                         Level:
                                     </label>
                                     <select class="form-control" [formControlName]="i">
-                                        <option *ngFor="let level of levels"> {{level}}
+                                        <select selected>Select Level</select>
+                                        <option *ngFor="let level of levels" [selected]="level==levels[0]"> {{level}}
                                         </option>
                                     </select>
                                 </div>
@@ -105,8 +112,34 @@
 
 
                     <button type="submit" [disabled]="!onboardeeForm.valid" [attr.class]="!onboardeeForm.valid?'not-valid btn bg-color-change mx-auto btnSubmit'
-                        :'btn bg-color-change mx-auto btnSubmit'">Add</button>
+                        :'btn bg-color-change mx-auto btnSubmit'" data-toggle="modal"
+                        data-target="#exampleModal">Add</button>
 
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div *ngIf="loading" class="modal-content" style="border: none;">
+                                <i class="spinner-border"></i>
+                            </div>
+                            <div *ngIf="!loading && response" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        {{response.Status==200?'Success':'Failure'}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{response.Message}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"
+                                        [attr.class]="response.Status==200?'btn btn-success':'btn btn-danger'"
+                                        data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

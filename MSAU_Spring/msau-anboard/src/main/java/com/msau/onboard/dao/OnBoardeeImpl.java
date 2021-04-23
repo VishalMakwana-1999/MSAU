@@ -30,6 +30,19 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     private JdbcTemplate jdbcTemplate;
     @Override
     public HashMap<String,Object> saveOnBoardee(OnBoardee onBoardee) {
+        int already_exist=0;
+        already_exist=jdbcTemplate.queryForObject("SELECT Count(*) as exist from onboardee where email='"+onBoardee.getEmail()+"'", new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getInt("exist");
+            }
+        });
+        if (already_exist>0){
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("Status",204);
+            map.put("Message","Email already exists");
+            return map;
+        }
         jdbcTemplate.update("INSERT into onboardee (fname,lname,startDate,bgcStatus,managerId,location,etaCompletion,email,dob,onBoardStatus)" +
                "VALUES (?,?,?,?,?,?,?,?,?,?)",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId()
         ,onBoardee.getLocation(),onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus());

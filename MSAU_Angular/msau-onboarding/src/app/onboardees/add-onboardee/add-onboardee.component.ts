@@ -14,9 +14,11 @@ export class AddOnboardeeComponent implements OnInit {
   bgcStatus: any = ['Idle', 'In Process', 'Completed', 'Failed']
   onboardStatus: any = ['Idle', 'In Process', 'Completed', 'Failed']
   levels: any = ['Beginner', 'Amateur', 'Novice', 'Intermediate', 'Expert']
+  response: any;
+  loading: boolean = false;
   ngOnInit(): void {
     this.fetchManagers();
-
+    this.response = null
   }
 
   fetchManagers(): void {
@@ -40,12 +42,13 @@ export class AddOnboardeeComponent implements OnInit {
     etaCompletion: ['', Validators.required],
     skills: this.fb.array([
       this.fb.control('')
-    ]),
+    ], Validators.required),
     skillLevel: this.fb.array([
       this.fb.control('')
-    ])
+    ], Validators.required)
   })
   onSubmit(): any {
+    this.loading = true;
     var values = this.onboardeeForm.value
     var skillList = [];
     console.log(values.skills)
@@ -74,8 +77,17 @@ export class AddOnboardeeComponent implements OnInit {
     }
     this.onboardeeService.createOnboardee(ob).subscribe((data: any) => {
       console.log(data)
+      this.response = {
+        'Status': data.Status,
+        'Message': data.Message
+      }
+      this.loading = false
     });
-
+    //this.response = {
+    //'Status': 200,
+    //'Message': "Success"
+    //}
+    // this.loading = false
   }
 
   get skills(): any {
