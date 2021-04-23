@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
 import { OnboardeeService } from '../onboardee.service';
-import { FormBuilder, Validators, FormArray } from "@angular/forms"
+import { FormBuilder, Validators, FormArray, Form } from "@angular/forms"
 import { OnboardeeModel } from "../models/onboardee"
 @Component({
   selector: 'app-onboardee-detail',
@@ -36,21 +36,28 @@ export class OnboardeeDetailComponent implements OnInit {
     onboardStatus: ['', Validators.required],
     etaCompletion: ['', Validators.required],
     skills: this.fb.array([
-      this.fb.control('')
-    ], Validators.required),
+    ]),
     skillLevel: this.fb.array([
-      this.fb.control('')
-    ], Validators.required)
+    ])
   })
   ngOnInit(): void {
     this.id = this.router.url.split("/")[2]
     this.onboardeeService.fetchOnboardees_byId(parseInt(this.id)).subscribe((data: any) => {
-      console.log(data)
       var skills = []
+      var skillLevel = []
+      const sks = <FormArray>this.onboardeeForm.get('skills')
+      const sklevel = <FormArray>this.onboardeeForm.get('skillLevel')
       for (var i in data.skills.skillList) {
         skills.push(data.skills.skillList[i].skillName)
         this.skilllevels.push(data.skills.skillList[i].level)
+        skillLevel.push(data.skills.skillList[i].level)
+        sks.push(this.fb.control(data.skills.skillList[i].skillName))
+        sklevel.push(this.fb.control(data.skills.skillList[i].level))
       }
+
+
+      //this.onboardeeForm.controls['skills'] = this.fb.array(skills.map(i => this.fb.group(i)));
+      console.log(skillLevel)
       this.onboardee = data;
       this.onboardeeForm.patchValue({
         'fname': data.fname,
@@ -64,8 +71,6 @@ export class OnboardeeDetailComponent implements OnInit {
         'bgcStatus': data.bgcStatus,
         'onboardStatus': data.onboardStatus,
         'etaCompletion': data.etaCompletion,
-        'skills': skills,
-        'skillLevel': this.skilllevels
       })
     })
     this.fetchManagers()

@@ -1,6 +1,6 @@
 <app-sidebar>
     <i *ngIf="!onboardee" class="spinner-border"></i>
-    <form *ngIf="onboardee" [formGroup]="onboardeeForm">
+    <form *ngIf="onboardee" [formGroup]="onboardeeForm" (ngSubmit)="onSubmit()">
         <div class="register-form">
             <div class="form">
                 <div class="note">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Background Check Status</label>
-                                <input *ngIf="!edit" class="form-control" type="text" [value]="onboardee.bgcStatus"
+                                <input *ngIf="!edit" class="form-control" type="text" formControlName="bgcStatus"
                                     readonly>
                                 <select *ngIf="edit" class="form-control" formControlName="bgcStatus">
                                     <option *ngFor="let status of bgcStatus" [selected]="status == onboardee.bgcStatus">
@@ -73,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Onboarding Status</label>
-                                <input *ngIf="!edit" class="form-control" type="text" [value]="onboardee.onboardStatus"
+                                <input *ngIf="!edit" class="form-control" type="text" formControlName="onboardStatus"
                                     readonly>
                                 <select *ngIf="edit" class="form-control" formControlName="onboardStatus">
                                     <option *ngFor="let status of onboardStatus"
@@ -109,10 +109,11 @@
                                     <label>
                                         Level:
                                     </label>
-                                    <input *ngIf="!edit" class="form-control" type="text"
-                                        [value]="onboardee.skills.skillList[i].level" readonly>
+                                    <input *ngIf="!edit" class="form-control" type="text" [formControlName]="i"
+                                        readonly>
                                     <select *ngIf="edit" class="form-control" [formControlName]="i">
                                         <option *ngFor="let level of levels" [selected]="level==skilllevels[i]">
+
                                             {{level}}
                                         </option>
                                     </select>
