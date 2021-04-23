@@ -10,7 +10,7 @@ public interface OnBoardeeRepository {
     HashMap<String,Object> saveOnBoardee(OnBoardee onBoardee);
     OnBoardee updateOnBoardee(OnBoardee onBoardee);
     OnBoardee getOnBoardeebyId(int DemandId);
-    List<OnBoardee> getOnBoardees();
+    List<OnBoardee> getOnBoardees(String name);
     HashMap<String,Object> deleteOnBoardee(int DemandId);
     List<MSManager> fetchManagers();
 }

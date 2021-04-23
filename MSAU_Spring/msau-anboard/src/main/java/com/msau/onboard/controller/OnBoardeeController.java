@@ -6,6 +6,7 @@ import com.msau.onboard.entity.OnBoardee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,10 +14,13 @@ import java.util.List;
 public class OnBoardeeController {
     @Autowired
     OnBoardeeRepository onBoardeeRepository;
-
     @GetMapping("/api/fetch_onboardees")
     public List<OnBoardee> getOnBoardees(){
-        return onBoardeeRepository.getOnBoardees();
+        return onBoardeeRepository.getOnBoardees("");
+    }
+    @GetMapping("/api/fetch_onboardees/search/{name}")
+    public List<OnBoardee> searchOnboardees(@PathVariable("name") String name){
+        return onBoardeeRepository.getOnBoardees(name);
     }
     @PostMapping("/api/update")
     public OnBoardee updateOnBoardee(@RequestBody OnBoardee onBoardee){

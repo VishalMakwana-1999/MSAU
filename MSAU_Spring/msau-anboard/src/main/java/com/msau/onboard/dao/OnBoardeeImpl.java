@@ -22,7 +22,7 @@ import java.util.Map;
 public class OnBoardeeImpl implements OnBoardeeRepository{
 
     private static final String SELECT_EVERY_ROW="Select * from onboardee as o,msmanager as m where o.managerId=m.managerId";
-    private static final String str="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId where o.active=1";
+    private static final String str="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId where o.active=1 ";
     private static final String SELECT_BY_ID="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId and o.demandId=";
     private static final String DELETE_BY_ID="UPDATE onboardee set active=0 where demandId=?";
     private static final String FETCH_MANAGERS="SELECT * from msmanager";
@@ -122,8 +122,10 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     }
 
     @Override
-    public List<OnBoardee> getOnBoardees() {
-        return jdbcTemplate.query(str, new ResultSetExtractor<List<OnBoardee> >() {
+    public List<OnBoardee> getOnBoardees(String name) {
+
+        String q=str+"and o.fname like '%"+name+"%' or o.lname like '%"+name+"%'";
+        return jdbcTemplate.query(q, new ResultSetExtractor<List<OnBoardee> >() {
             @Override
             public List<OnBoardee> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
