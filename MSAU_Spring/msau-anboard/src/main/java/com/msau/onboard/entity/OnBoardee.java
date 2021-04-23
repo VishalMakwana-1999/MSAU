@@ -21,4 +21,5 @@ public class OnBoardee {
     private String onboardStatus;
     MSManager manager;
     Skills skills;
+    private String phone;
 }

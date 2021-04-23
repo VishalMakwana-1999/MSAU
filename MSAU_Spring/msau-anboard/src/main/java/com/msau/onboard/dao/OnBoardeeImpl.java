@@ -43,11 +43,10 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
             map.put("Message","Email already exists");
             return map;
         }
-        jdbcTemplate.update("INSERT into onboardee (fname,lname,startDate,bgcStatus,managerId,location,etaCompletion,email,dob,onBoardStatus)" +
-               "VALUES (?,?,?,?,?,?,?,?,?,?)",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId()
-        ,onBoardee.getLocation(),onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus());
+        jdbcTemplate.update("INSERT into onboardee (fname,lname,startDate,bgcStatus,managerId,location,etaCompletion,email,dob,onBoardStatus,phone)" +
+               "VALUES (?,?,?,?,?,?,?,?,?,?,?)",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId()
+        ,onBoardee.getLocation(),onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus(),onBoardee.getPhone());
         List<Skill> skillList=onBoardee.getSkills().getSkillList();
-        System.out.println(skillList);
         int rown=0;
         rown=jdbcTemplate.queryForObject("SELECT MAX(demandId) as demandId from onboardee", new RowMapper<Integer>() {
             @Override
@@ -55,7 +54,6 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
                 return rs.getInt("demandId");
             }
         });
-        System.out.println(rown);
         for(int i=0;i<skillList.size();i++){
             Skill s= skillList.get(i);
             jdbcTemplate.update("INSERT into onboardskill (demandId,skillName,level) VALUES (?,?,?)",rown,s.getSkillName(),s.getLevel());
@@ -98,6 +96,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
                         onBoardee.setEmail(rs.getString("email"));
                         onBoardee.setDob(rs.getString("dob"));
                         onBoardee.setOnboardStatus(rs.getString("onboardStatus"));
+                        onBoardee.setPhone(rs.getString("phone"));
                     }
                     Integer id = rs.getInt("id");
                     Skill skill = skillKeyskillMap.get(id);
@@ -150,6 +149,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
                         onBoardee.setEmail(rs.getString("email"));
                         onBoardee.setDob(rs.getString("dob"));
                         onBoardee.setOnboardStatus(rs.getString("onboardStatus"));
+                        onBoardee.setPhone(rs.getString("phone"));
                     }
                     Integer id = rs.getInt("id");
                     Skill skill = skillKeyskillMap.get(id);
