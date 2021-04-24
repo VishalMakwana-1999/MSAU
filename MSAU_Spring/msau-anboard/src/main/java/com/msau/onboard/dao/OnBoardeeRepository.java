@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OnBoardeeRepository {
     HashMap<String,Object> saveOnBoardee(OnBoardee onBoardee);
-    OnBoardee updateOnBoardee(OnBoardee onBoardee);
+    HashMap<String,Object> updateOnBoardee(OnBoardee onBoardee);
     OnBoardee getOnBoardeebyId(int DemandId);
     List<OnBoardee> getOnBoardees(String name);
     HashMap<String,Object> deleteOnBoardee(int DemandId);

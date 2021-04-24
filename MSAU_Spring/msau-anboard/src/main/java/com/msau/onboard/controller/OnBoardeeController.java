@@ -23,7 +23,7 @@ public class OnBoardeeController {
         return onBoardeeRepository.getOnBoardees(name);
     }
     @PostMapping("/api/update")
-    public OnBoardee updateOnBoardee(@RequestBody OnBoardee onBoardee){
+    public HashMap<String, Object> updateOnBoardee(@RequestBody OnBoardee onBoardee){
         return onBoardeeRepository.updateOnBoardee(onBoardee);
     }
     @GetMapping("/api/fetch_onboardees/{id}")

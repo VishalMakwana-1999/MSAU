@@ -65,8 +65,34 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     }
 
     @Override
-    public OnBoardee updateOnBoardee(OnBoardee onBoardee) {
-        return onBoardee;
+    public HashMap<String,Object> updateOnBoardee(OnBoardee onBoardee) {
+        int rown=0;
+        HashMap<String,Object> map=new HashMap<>();
+        rown=jdbcTemplate.queryForObject("SELECT COUNT(*) as count from onboardee where email='"+onBoardee.getEmail()+"' and demandId!='"
+                +onBoardee.getDemandId()+"'", new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int i) throws SQLException {
+                return rs.getInt("count");
+            }
+        });
+        if (rown>0){
+            map.put("Status",204);
+            map.put("Message","Another Onboardee has the same email");
+            return map;
+        }
+        jdbcTemplate.update("UPDATE onboardee set fname=?,lname=?,startDate=?,bgcStatus=?,managerId=?,location=?,etaCompletion=?,email=?,dob=?,onBoardStatus=?" +
+                ",phone=? where demandId=?",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId(),onBoardee.getLocation()
+        ,onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus(),onBoardee.getPhone(),onBoardee.getDemandId());
+        jdbcTemplate.update("DELETE from onboardskill where demandId=?",onBoardee.getDemandId());
+        List<Skill> skillList=onBoardee.getSkills().getSkillList();
+        for(int i=0;i<skillList.size();i++){
+            Skill s= skillList.get(i);
+            jdbcTemplate.update("INSERT into onboardskill (demandId,skillName,level) VALUES (?,?,?)",onBoardee.getDemandId(),s.getSkillName(),s.getLevel());
+        }
+
+        map.put("Status",200);
+        map.put("Message","Onboardee details edited successfully");
+        return map;
     }
 
     @Override
