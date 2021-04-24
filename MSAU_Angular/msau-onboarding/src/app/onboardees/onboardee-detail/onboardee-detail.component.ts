@@ -40,9 +40,8 @@ export class OnboardeeDetailComponent implements OnInit {
     skillLevel: this.fb.array([
     ])
   })
-  ngOnInit(): void {
-    this.id = this.router.url.split("/")[2]
-    this.onboardeeService.fetchOnboardees_byId(parseInt(this.id)).subscribe((data: any) => {
+  fetchById(id: any): any {
+    this.onboardeeService.fetchOnboardees_byId(parseInt(id)).subscribe((data: any) => {
       var skills = []
       var skillLevel = []
       const sks = <FormArray>this.onboardeeForm.get('skills')
@@ -54,10 +53,6 @@ export class OnboardeeDetailComponent implements OnInit {
         sks.push(this.fb.control(data.skills.skillList[i].skillName))
         sklevel.push(this.fb.control(data.skills.skillList[i].level))
       }
-
-
-      //this.onboardeeForm.controls['skills'] = this.fb.array(skills.map(i => this.fb.group(i)));
-      console.log(skillLevel)
       this.onboardee = data;
       this.onboardeeForm.patchValue({
         'fname': data.fname,
@@ -73,12 +68,38 @@ export class OnboardeeDetailComponent implements OnInit {
         'etaCompletion': data.etaCompletion,
       })
     })
+  }
+  ngOnInit(): void {
+    this.id = this.router.url.split("/")[2]
+    this.fetchById(this.id);
     this.fetchManagers()
   }
+
+  refreshValues(): any {
+    if (this.response.Status == 204) {
+      this.onboardeeForm.patchValue({
+        'fname': this.onboardee.fname,
+        'lname': this.onboardee.lname,
+        'email': this.onboardee.email,
+        'phone': this.onboardee.phone,
+        'startDate': this.onboardee.startDate,
+        'location': this.onboardee.location,
+        'dob': this.onboardee.dob,
+        'managerId': this.onboardee.managerId,
+        'bgcStatus': this.onboardee.bgcStatus,
+        'onboardStatus': this.onboardee.onboardStatus,
+        'etaCompletion': this.onboardee.etaCompletion,
+      })
+    }
+    else {
+      this.router.navigate(["onboardees"])
+    }
+
+  }
+
   fetchManagers(): void {
     this.onboardeeService.fetchManagers().subscribe((man: any) => {
       this.managers = man;
-      console.log(man)
     })
   }
   onSubmit(): any {
@@ -86,7 +107,6 @@ export class OnboardeeDetailComponent implements OnInit {
     this.loading = true;
     var values = this.onboardeeForm.value
     var skillList = [];
-    console.log(values.skills)
     for (var index in values.skills) {
       skillList.push({
         'skillName': values.skills[index],
@@ -95,6 +115,7 @@ export class OnboardeeDetailComponent implements OnInit {
     }
     console.log(skillList)
     var ob: OnboardeeModel = {
+      demandId: this.onboardee.demandId,
       fname: values.fname,
       lname: values.lname,
       email: values.email,
@@ -110,20 +131,14 @@ export class OnboardeeDetailComponent implements OnInit {
         skillList: skillList
       }
     }
-    /* this.onboardeeService.createOnboardee(ob).subscribe((data: any) => {
+    this.onboardeeService.updateOnboardee(ob).subscribe((data: any) => {
       console.log(data)
       this.response = {
         'Status': data.Status,
         'Message': data.Message
       }
       this.loading = false
-    }); */
-    this.response = {
-      'Status': 200,
-      'Message': "Success"
-    }
-    this.loading = false
-    console.log(ob)
+    });
   }
 
   get skills(): any {

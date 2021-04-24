@@ -99,7 +99,8 @@
                                     <label>
                                         Skill:
                                     </label>
-                                    <input class="form-control" type="text" [formControlName]="i" [readonly]="!edit">
+                                    <input class="form-control" type="text" [formControlName]="i" [readonly]="!edit"
+                                        required>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +148,7 @@
                                 <div class="modal-footer">
                                     <button type="button"
                                         [attr.class]="response.Status==200?'btn btn-success':'btn btn-danger'"
-                                        data-dismiss="modal">Close</button>
+                                        data-dismiss="modal" (click)="refreshValues()">Close</button>
                                 </div>
                             </div>
                         </div>

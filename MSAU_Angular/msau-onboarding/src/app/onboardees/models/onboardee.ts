@@ -1,4 +1,5 @@
 export interface OnboardeeModel {
+    demandId: any,
     fname: string,
     lname: string,
     email: string,

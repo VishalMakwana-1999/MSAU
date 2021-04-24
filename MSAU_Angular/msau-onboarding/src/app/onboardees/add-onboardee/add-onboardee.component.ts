@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OnboardeeService } from '../onboardee.service';
 import { FormBuilder, Validators, FormArray } from "@angular/forms"
 import { OnboardeeModel } from "../models/onboardee"
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-onboardee',
   templateUrl: './add-onboardee.component.html',
@@ -9,7 +10,7 @@ import { OnboardeeModel } from "../models/onboardee"
 })
 export class AddOnboardeeComponent implements OnInit {
 
-  constructor(private onboardeeService: OnboardeeService, private fb: FormBuilder) { }
+  constructor(private onboardeeService: OnboardeeService, private fb: FormBuilder, private router: Router) { }
   managers: any;
   bgcStatus: any = ['Idle', 'In Process', 'Completed', 'Failed']
   onboardStatus: any = ['Idle', 'In Process', 'Completed', 'Failed']
@@ -60,6 +61,7 @@ export class AddOnboardeeComponent implements OnInit {
     }
     console.log(skillList)
     var ob: OnboardeeModel = {
+      demandId: null,
       fname: values.fname,
       lname: values.lname,
       email: values.email,
@@ -89,7 +91,11 @@ export class AddOnboardeeComponent implements OnInit {
     //}
     // this.loading = false
   }
-
+  goToDashboard(): any {
+    if (this.response.Status == 200) {
+      this.router.navigate(['onboardees'])
+    }
+  }
   get skills(): any {
     return this.onboardeeForm.get('skills') as FormArray;
   }

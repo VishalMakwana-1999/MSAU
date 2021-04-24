@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
 import { LoginService } from '../core/login/login.service';
 import { OnboardeeService } from './onboardee.service';
+
+import { FormBuilder, Validators, FormArray, Form } from "@angular/forms"
 @Component({
   selector: 'app-onboardees',
   templateUrl: './onboardees.component.html',
@@ -10,35 +12,24 @@ import { OnboardeeService } from './onboardee.service';
 export class OnboardeesComponent implements OnInit {
   user: String = ""
   onboardee_list: any;
-  constructor(private router: Router, private loginService: LoginService, private onboardeeService: OnboardeeService) { }
-  onboardees = [
-    {
-      id: 1,
-      name: "Vishal Makwana",
-      email: "vishalmakwana@accolitedigital.com"
-    },
-    {
-      id: 2,
-      name: "Vishal Makwana2",
-      email: "vishalmakwana@accolitedigital.com"
-    },
-    {
-      id: 3,
-      name: "Vishal Makwana3",
-      email: "vishalmakwana@accolitedigital.com"
-    },
-
-  ]
+  loading: boolean = false;
+  constructor(private router: Router, private loginService: LoginService, private onboardeeService: OnboardeeService
+    , private fb: FormBuilder) { }
+  searchForm = this.fb.group({
+    'searchName': this.fb.control('')
+  })
   ngOnInit(): void {
     this.init()
 
   }
   init(): void {
     if (this.loginService.alreadyLoggedIn()) {
+      this.loading = true;
       this.user != this.loginService.alreadyLoggedIn();
       this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
         this.onboardee_list = data;
         console.log(data)
+        this.loading = false;
       })
     }
     else {
@@ -47,10 +38,11 @@ export class OnboardeesComponent implements OnInit {
   }
   update(): void {
     if (this.loginService.alreadyLoggedIn()) {
+      this.loading = true;
       this.user != this.loginService.alreadyLoggedIn();
       this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
         this.onboardee_list = data;
-        console.log(data)
+        this.loading = false;
       })
     }
     else {
@@ -64,6 +56,20 @@ export class OnboardeesComponent implements OnInit {
       this.update()
     });
 
+  }
+
+  searchOnBoardee(): any {
+    var value = this.searchForm.value.searchName.trim()
+    if (value == "") {
+      this.init()
+    }
+    else {
+      this.loading = true;
+      this.onboardeeService.searchOnboardee(value).subscribe((res: any) => {
+        this.onboardee_list = res;
+        this.loading = false;
+      })
+    }
   }
 
 

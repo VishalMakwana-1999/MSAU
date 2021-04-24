@@ -26,4 +26,12 @@ export class OnboardeeService {
   createOnboardee(ob: OnboardeeModel): any {
     return this.http.post("/api/create", ob)
   }
+
+  updateOnboardee(ob: OnboardeeModel): any {
+    return this.http.post("/api/update", ob)
+  }
+
+  searchOnboardee(name: string): any {
+    return this.http.get(`api/fetch_onboardees/search/${name}`)
+  }
 }

@@ -5,9 +5,12 @@
     <div class="d-flex mt-3">
         <div class="input-group d-flex">
             <div class="form-outline" style="border-radius: 0;">
-                <input type="search" id="form1" class="form-control" placeholder="Search" />
+                <form [formGroup]="searchForm">
+                    <input type="text" id="form1" class="form-control" placeholder="Search"
+                        formControlName="searchName" />
+                </form>
             </div>
-            <button type="button" class="btn bg-color-change">
+            <button type="button" (click)="searchOnBoardee()" class="btn bg-color-change">
                 <i class="fa fa-search"></i>
             </button>
         </div>
@@ -16,9 +19,12 @@
                     class="fa fa-plus-circle"></i></button>
         </div>
     </div>
-    <i *ngIf="!onboardee_list" class="spinner-border"></i>
-    <table class="table table-hover table-condensed text-color-change mt-3" id="dev-table">
-        <thead class="table-tr-shadow">
+
+    <i *ngIf="loading" class="spinner-border"></i>
+
+    <h3 *ngIf="!loading && !onboardee_list.length" class="text-color-change mt-3">No such onboardee</h3>
+    <table *ngIf="!loading" class="table table-hover table-condensed text-color-change mt-3" id="dev-table">
+        <thead *ngIf="onboardee_list.length" class="table-tr-shadow">
             <tr>
                 <th></th>
                 <th>Name</th>
@@ -29,6 +35,7 @@
                 <th></th>
             </tr>
         </thead>
+
         <tr *ngFor="let onboardee of onboardee_list">
             <td><i class="fa fa-user-circle-o"></i></td>
             <td>{{onboardee.fname}} {{onboardee.lname}}</td>
