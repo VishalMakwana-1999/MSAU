@@ -149,8 +149,10 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
 
     @Override
     public List<OnBoardee> getOnBoardees(String name) {
-
-        String q=str+"and (o.fname like '%"+name+"%' or o.lname like '%"+name+"%')";
+        String q=str;
+        if(name!="") {
+            q = str + "and (o.fname like '%" + name + "%' or o.lname like '%" + name + "%')";
+        }
         return jdbcTemplate.query(q, new ResultSetExtractor<List<OnBoardee> >() {
             @Override
             public List<OnBoardee> extractData(ResultSet rs) throws SQLException, DataAccessException {
