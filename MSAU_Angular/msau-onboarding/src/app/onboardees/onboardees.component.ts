@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router"
-import { LoginService } from '../core/login/login.service';
 import { OnboardeeService } from './onboardee.service';
 
-import { FormBuilder, Validators, FormArray, Form } from "@angular/forms"
+import { FormBuilder } from "@angular/forms"
 @Component({
   selector: 'app-onboardees',
   templateUrl: './onboardees.component.html',
@@ -13,7 +11,7 @@ export class OnboardeesComponent implements OnInit {
   user: String = ""
   onboardee_list: any;
   loading: boolean = false;
-  constructor(private router: Router, private loginService: LoginService, private onboardeeService: OnboardeeService
+  constructor(private onboardeeService: OnboardeeService
     , private fb: FormBuilder) { }
   searchForm = this.fb.group({
     'searchName': this.fb.control('')
@@ -23,31 +21,22 @@ export class OnboardeesComponent implements OnInit {
 
   }
   init(): void {
-    if (this.loginService.alreadyLoggedIn()) {
-      this.loading = true;
-      this.user != this.loginService.alreadyLoggedIn();
-      this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
-        this.onboardee_list = data;
-        console.log(data)
-        this.loading = false;
-      })
-    }
-    else {
-      this.router.navigate(['login'])
-    }
+
+    this.loading = true;
+    this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
+      this.onboardee_list = data;
+      console.log(data)
+      this.loading = false;
+    })
+
   }
   update(): void {
-    if (this.loginService.alreadyLoggedIn()) {
-      this.loading = true;
-      this.user != this.loginService.alreadyLoggedIn();
-      this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
-        this.onboardee_list = data;
-        this.loading = false;
-      })
-    }
-    else {
-      this.router.navigate(['login'])
-    }
+    this.loading = true;
+    this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
+      this.onboardee_list = data;
+      console.log(data)
+      this.loading = false;
+    })
   }
   deleteById(id: number): any {
     this.onboardee_list = [];
