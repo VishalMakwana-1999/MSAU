@@ -160,7 +160,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
     public List<OnBoardee> getOnBoardees(String name) {
         String q=str;
         if(name!="") {
-            q = str + "and (o.fname like '%" + name + "%' or o.lname like '%" + name + "%')";
+            q = str + "and (o.fname like '%" + name + "%' or o.lname like '%" + name + "%' or o.location like '%"+name+"%')";
             logger.info("Onboardees fetched with name: "+name);
         }
         else{
@@ -235,5 +235,63 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
             return new MSManager(rs.getInt("managerId"),rs.getString("ManagerFname"), rs.getString("managerLname"));
         });
     }
+
+    @Override
+    public HashMap<String, Object> fetchSkills() {
+        HashMap<String,Object> map= new HashMap<>();
+        ArrayList<String> skills= new ArrayList<>();
+        ArrayList<Integer> count=new ArrayList<>();
+        jdbcTemplate.query("Select count(*) as count ,skillName from onboardskill group by skillName", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                skills.add(resultSet.getString("skillName"));
+                count.add(resultSet.getInt("count"));
+                return null;
+            }
+        });
+        map.put("skills",skills);
+        map.put("count",count);
+        logger.info("Skills Trends Fetched");
+        return map;
+    }
+
+    @Override
+    public HashMap<String, Object> fetchLocationTrends() {
+        HashMap<String,Object> map= new HashMap<>();
+        ArrayList<String> location= new ArrayList<>();
+        ArrayList<Integer> count=new ArrayList<>();
+        jdbcTemplate.query("Select count(*) as count ,location from onboardee group by location", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                location.add(resultSet.getString("location"));
+                count.add(resultSet.getInt("count"));
+                return null;
+            }
+        });
+        map.put("location",location);
+        map.put("count",count);
+        logger.info("Location Trends Fetched");
+        return map;
+    }
+
+    @Override
+    public HashMap<String, Object> fetchManagerTrends() {
+        HashMap<String,Object> map= new HashMap<>();
+        ArrayList<String> manager= new ArrayList<>();
+        ArrayList<Integer> count=new ArrayList<>();
+        jdbcTemplate.query("Select count(*) as count ,m.managerFName, m.managerLName from onboardee as o,msmanager as m where o.managerId=m.managerId group by o.managerId", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                manager.add(resultSet.getString("managerFname")+" "+ resultSet.getString("managerLName"));
+                count.add(resultSet.getInt("count"));
+                return null;
+            }
+        });
+        map.put("manager",manager);
+        map.put("count",count);
+        logger.info("Manager Trends Fetched");
+        return map;
+    }
+
 
 }

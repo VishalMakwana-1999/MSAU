@@ -16,6 +16,12 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { OnboardeeDetailComponent } from './onboardees/onboardee-detail/onboardee-detail.component';
 import { OnboardeeCardComponent } from './onboardees/onboardee-card/onboardee-card.component';
 import { AddOnboardeeComponent } from './onboardees/add-onboardee/add-onboardee.component';
+import { TrendsComponent } from './onboardees/trends/trends.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { SkilltrendsComponent } from './onboardees/trends/skilltrends/skilltrends.component';
+import { LocationtrendsComponent } from './onboardees/trends/locationtrends/locationtrends.component';
+import { ManagertrendsComponent } from './onboardees/trends/managertrends/managertrends.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +33,10 @@ import { AddOnboardeeComponent } from './onboardees/add-onboardee/add-onboardee.
     OnboardeeDetailComponent,
     OnboardeeCardComponent,
     AddOnboardeeComponent,
+    TrendsComponent,
+    SkilltrendsComponent,
+    LocationtrendsComponent,
+    ManagertrendsComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +44,8 @@ import { AddOnboardeeComponent } from './onboardees/add-onboardee/add-onboardee.
     SocialLoginModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgApexchartsModule
   ],
   providers: [
     {

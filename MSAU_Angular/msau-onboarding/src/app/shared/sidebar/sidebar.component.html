@@ -20,6 +20,11 @@
                 [ngClass]="url=='assessments'?'bg-color-change text-white':'bg-light'">Assessments</a>
             <a routerLink="/onboardees" class="list-group-item list-group-item-action"
                 [ngClass]="url=='onboardees'?'bg-color-change text-white':'bg-light'">Onboarding Portal</a>
+            <a *ngIf="url=='onboardees'" routerLink="/onboardees"
+                class="list-group-item-subitem  list-group-item-action"
+                [ngClass]="url=='onboardees' && fullurl!='/onboardees/trends'?'bg-color-change text-white':'bg-light'">Onboardees</a>
+            <a routerLink="/onboardees/trends" class="list-group-item-subitem list-group-item-action"
+                [ngClass]=" fullurl=='/onboardees/trends' ?'bg-color-change text-white':'bg-light'">Trends</a>
 
         </div>
 

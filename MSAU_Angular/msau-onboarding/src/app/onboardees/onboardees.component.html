@@ -21,15 +21,14 @@
     </div>
 
     <i *ngIf="loading" class="spinner-border"></i>
-
     <h3 *ngIf="!loading && !onboardee_list.length" class="text-color-change mt-3">No such onboardee</h3>
     <table *ngIf="!loading" class="table table-hover table-condensed text-color-change mt-3" id="dev-table">
         <thead *ngIf="onboardee_list.length" class="table-tr-shadow">
             <tr>
                 <th></th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Location</th>
+                <th>Name <i (click)="sortOnBoardee('name')" class="fa fa-sort"></i></th>
+                <th>Email <i (click)="sortOnBoardee('email')" class="fa fa-sort"></i></th>
+                <th>Location <i (click)="sortOnBoardee('location')" class="fa fa-sort"></i></th>
                 <th>Status</th>
                 <th></th>
                 <th></th>

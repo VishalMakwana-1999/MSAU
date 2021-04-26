@@ -13,4 +13,7 @@ public interface OnBoardeeRepository {
     List<OnBoardee> getOnBoardees(String name);
     HashMap<String,Object> deleteOnBoardee(int DemandId);
     List<MSManager> fetchManagers();
+    HashMap<String,Object> fetchSkills();
+    HashMap<String,Object> fetchLocationTrends();
+    HashMap<String,Object> fetchManagerTrends();
 }

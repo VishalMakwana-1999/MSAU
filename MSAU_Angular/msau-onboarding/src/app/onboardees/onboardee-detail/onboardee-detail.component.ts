@@ -42,32 +42,38 @@ export class OnboardeeDetailComponent implements OnInit {
   })
   fetchById(id: any): any {
     this.onboardeeService.fetchOnboardees_byId(parseInt(id)).subscribe((data: any) => {
-      var skills = []
-      var skillLevel = []
-      const sks = <FormArray>this.onboardeeForm.get('skills')
-      const sklevel = <FormArray>this.onboardeeForm.get('skillLevel')
-      for (var i in data.skills.skillList) {
-        skills.push(data.skills.skillList[i].skillName)
-        this.skilllevels.push(data.skills.skillList[i].level)
-        skillLevel.push(data.skills.skillList[i].level)
-        sks.push(this.fb.control(data.skills.skillList[i].skillName))
-        sklevel.push(this.fb.control(data.skills.skillList[i].level))
+      if (data == null) {
+        this.router.navigate(['onboardees'])
       }
-      this.onboardee = data;
-      this.onboardeeForm.patchValue({
-        'fname': data.fname,
-        'lname': data.lname,
-        'email': data.email,
-        'phone': data.phone,
-        'startDate': data.startDate,
-        'location': data.location,
-        'dob': data.dob,
-        'managerId': data.managerId,
-        'bgcStatus': data.bgcStatus,
-        'onboardStatus': data.onboardStatus,
-        'etaCompletion': data.etaCompletion,
-      })
+      else {
+        var skills = []
+        var skillLevel = []
+        const sks = <FormArray>this.onboardeeForm.get('skills')
+        const sklevel = <FormArray>this.onboardeeForm.get('skillLevel')
+        for (var i in data.skills.skillList) {
+          skills.push(data.skills.skillList[i].skillName)
+          this.skilllevels.push(data.skills.skillList[i].level)
+          skillLevel.push(data.skills.skillList[i].level)
+          sks.push(this.fb.control(data.skills.skillList[i].skillName))
+          sklevel.push(this.fb.control(data.skills.skillList[i].level))
+        }
+        this.onboardee = data;
+        this.onboardeeForm.patchValue({
+          'fname': data.fname,
+          'lname': data.lname,
+          'email': data.email,
+          'phone': data.phone,
+          'startDate': data.startDate,
+          'location': data.location,
+          'dob': data.dob,
+          'managerId': data.managerId,
+          'bgcStatus': data.bgcStatus,
+          'onboardStatus': data.onboardStatus,
+          'etaCompletion': data.etaCompletion,
+        })
+      }
     })
+
   }
   ngOnInit(): void {
     this.id = this.router.url.split("/")[2]

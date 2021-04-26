@@ -54,4 +54,22 @@ public class OnBoardeeController {
         logger.info("Manager List was requested");
         return onBoardeeRepository.fetchManagers();
     }
+
+    @GetMapping("/api/skills")
+    public HashMap<String, Object> fetchSkills(){
+        logger.info("Skills Trends Requested");
+        return onBoardeeRepository.fetchSkills();
+    }
+
+    @GetMapping("/api/location")
+    public HashMap<String, Object> fetchLocationTrends(){
+        logger.info("Location Trends Requested");
+        return onBoardeeRepository.fetchLocationTrends();
+    }
+
+    @GetMapping("/api/managerTrends")
+    public HashMap<String, Object> fetchManagerTrends(){
+        logger.info("Manager Trends Requested");
+        return onBoardeeRepository.fetchManagerTrends();
+    }
 }

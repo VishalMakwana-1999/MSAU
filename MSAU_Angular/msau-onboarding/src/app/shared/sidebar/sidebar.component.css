@@ -45,3 +45,11 @@ body {
       margin-left: -15rem;
     }
   }
+  .list-group-item-subitem{
+    position: relative;
+    display: block;
+    padding: 0rem 1.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+    text-decoration: none;
+    background-color: #173f5f99;
+  }

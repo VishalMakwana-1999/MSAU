@@ -11,6 +11,7 @@ export class OnboardeesComponent implements OnInit {
   user: String = ""
   onboardee_list: any;
   loading: boolean = false;
+  rev: boolean = false;
   constructor(private onboardeeService: OnboardeeService
     , private fb: FormBuilder) { }
   searchForm = this.fb.group({
@@ -61,5 +62,21 @@ export class OnboardeesComponent implements OnInit {
     }
   }
 
+  sortOnBoardee(type: string): any {
+    var sort1 = 1;
+    var sort2 = -1;
+    if (this.rev) {
+      sort1 = -1;
+      sort2 = 1;
+    }
+    switch (type) {
+      case 'name': this.onboardee_list.sort((a: any, b: any) => (a.fname > b.fname) ? sort1 : ((b.fname > a.fname) ? sort2 : 0));
+        break;
+      case 'email': this.onboardee_list.sort((a: any, b: any) => (a.email > b.email) ? sort1 : ((b.email > a.email) ? sort2 : 0));
+        break;
+      case 'location': this.onboardee_list.sort((a: any, b: any) => (a.location > b.location) ? sort1 : ((b.location > a.location) ? sort2 : 0));
+    }
+    this.rev = !this.rev;
+  }
 
 }

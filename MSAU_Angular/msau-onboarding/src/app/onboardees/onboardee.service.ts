@@ -34,4 +34,15 @@ export class OnboardeeService {
   searchOnboardee(name: string): any {
     return this.http.get(`api/fetch_onboardees/search/${name}`)
   }
+
+  fetchSkills(): any {
+    return this.http.get("api/skills")
+  }
+
+  fetchLocation(): any {
+    return this.http.get("/api/location")
+  }
+  fetchManagerTrends(): any {
+    return this.http.get("/api/managerTrends")
+  }
 }

@@ -7,10 +7,13 @@ import { Router } from "@angular/router"
 })
 export class SidebarComponent implements OnInit {
   url: string = "";
+  fullurl: string = "";
   constructor(private router: Router) { }
   toggle: boolean = false
   ngOnInit(): void {
     this.url = this.router.url.split("/")[1];
+    this.fullurl = this.router.url;
+    console.log(this.router.url)
   }
   toggleMenu(): void {
     this.toggle = !this.toggle
