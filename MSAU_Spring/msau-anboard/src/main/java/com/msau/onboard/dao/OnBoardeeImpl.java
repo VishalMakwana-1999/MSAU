@@ -4,6 +4,8 @@ import com.msau.onboard.entity.MSManager;
 import com.msau.onboard.entity.OnBoardee;
 import com.msau.onboard.entity.Skill;
 import com.msau.onboard.entity.Skills;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,8 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Repository
 public class OnBoardeeImpl implements OnBoardeeRepository{
+    Logger logger= LoggerFactory.getLogger(OnBoardeeImpl.class);
 
     private static final String SELECT_EVERY_ROW="Select * from onboardee as o,msmanager as m where o.managerId=m.managerId";
     private static final String str="Select * from onboardee as o LEFT JOIN msmanager as m on o.managerId=m.managerId Left join onboardskill as os on o.demandId=os.demandId where o.active=1 ";
@@ -41,12 +45,14 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
             HashMap<String,Object> map=new HashMap<>();
             map.put("Status",204);
             map.put("Message","Email already exists");
+            logger.warn("Request for adding onboardee rejected since email already exists");
             return map;
         }
         jdbcTemplate.update("INSERT into onboardee (fname,lname,startDate,bgcStatus,managerId,location,etaCompletion,email,dob,onBoardStatus,phone)" +
                "VALUES (?,?,?,?,?,?,?,?,?,?,?)",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId()
         ,onBoardee.getLocation(),onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus(),onBoardee.getPhone());
         List<Skill> skillList=onBoardee.getSkills().getSkillList();
+        logger.info("Onboardee was added into the database");
         int rown=0;
         rown=jdbcTemplate.queryForObject("SELECT MAX(demandId) as demandId from onboardee", new RowMapper<Integer>() {
             @Override
@@ -61,6 +67,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
         HashMap<String,Object> map=new HashMap();
         map.put("Status",200);
         map.put("Message","Onboardee Added");
+        logger.info("New Onboardee Added  with id: "+Integer.toString(rown));
         return map;
     }
 
@@ -84,6 +91,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
                 ",phone=? where demandId=?",onBoardee.getFname(),onBoardee.getLname(),onBoardee.getStartDate(),onBoardee.getBgcStatus(),onBoardee.getManagerId(),onBoardee.getLocation()
         ,onBoardee.getEtaCompletion(),onBoardee.getEmail(),onBoardee.getDob(),onBoardee.getOnboardStatus(),onBoardee.getPhone(),onBoardee.getDemandId());
         jdbcTemplate.update("DELETE from onboardskill where demandId=?",onBoardee.getDemandId());
+        logger.info("Onboardee Details were edited in the database");
         List<Skill> skillList=onBoardee.getSkills().getSkillList();
         for(int i=0;i<skillList.size();i++){
             Skill s= skillList.get(i);
@@ -92,12 +100,13 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
 
         map.put("Status",200);
         map.put("Message","Onboardee details edited successfully");
+        logger.info("Onboardee with id: "+Integer.toString(onBoardee.getDemandId())+" was updated");
         return map;
     }
 
     @Override
     public OnBoardee getOnBoardeebyId(int DemandId) {
-
+        logger.info("Onboardee with id: "+Integer.toString(DemandId)+" was fetched");
         return jdbcTemplate.query(SELECT_BY_ID+Integer.toString(DemandId),new ResultSetExtractor<OnBoardee>(){
 
             @Override
@@ -152,7 +161,12 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
         String q=str;
         if(name!="") {
             q = str + "and (o.fname like '%" + name + "%' or o.lname like '%" + name + "%')";
+            logger.info("Onboardees fetched with name: "+name);
         }
+        else{
+            logger.info("All Onboardees fetched");
+        }
+
         return jdbcTemplate.query(q, new ResultSetExtractor<List<OnBoardee> >() {
             @Override
             public List<OnBoardee> extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -210,11 +224,13 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
         jdbcTemplate.update(DELETE_BY_ID,DemandId);
         map.put("status", 200);
         map.put("message", "Onboardee Deleted");
+        logger.warn("Onboardee with id: "+Integer.toString(DemandId)+" was deleted");
         return map;
     }
 
     @Override
     public List<MSManager> fetchManagers() {
+        logger.info("list of Managers was fetched");
         return jdbcTemplate.query(FETCH_MANAGERS,(rs,rown)->{
             return new MSManager(rs.getInt("managerId"),rs.getString("ManagerFname"), rs.getString("managerLname"));
         });
