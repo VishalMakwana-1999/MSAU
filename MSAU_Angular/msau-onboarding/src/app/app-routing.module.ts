@@ -11,12 +11,12 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, pathMatch: 'full'
   },
-  { path: "login", component: LoginComponent },
-  { path: "onboardees", component: OnboardeesComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: "login", component: LoginComponent, },
+  { path: "onboardees", component: OnboardeesComponent, canActivate: [AuthGuard] },
   { path: "onboardees/create", component: AddOnboardeeComponent, canActivate: [AuthGuard] },
   { path: "onboardees/trends", component: TrendsComponent, canActivate: [AuthGuard] },
   { path: "onboardees/:id", component: OnboardeeDetailComponent, canActivate: [AuthGuard] },
-  { path: "**", redirectTo: "" }
+  //{ path: "**", redirectTo: "" }
 ];
 
 @NgModule({

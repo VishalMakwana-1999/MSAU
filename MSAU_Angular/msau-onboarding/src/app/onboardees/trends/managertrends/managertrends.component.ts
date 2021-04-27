@@ -27,7 +27,7 @@ export class ManagertrendsComponent implements OnInit {
           height: 300
         },
         fill: {
-          colors: ['#173f5f', '#173f5f', '#173f5f']
+          colors: ['#173f5f']
         },
         plotOptions: {
           bar: {

@@ -10,7 +10,7 @@ import { LoginService } from 'src/app/core/login/login.service';
 export class LoginComponent implements OnInit {
   user: String = "";
   loggedIn: boolean = false;
-  constructor(private authService: SocialAuthService, private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { }
   ngOnInit(): void {
     if (this.loginService.alreadyLoggedIn()) {
       this.router.navigate(['onboardees'])

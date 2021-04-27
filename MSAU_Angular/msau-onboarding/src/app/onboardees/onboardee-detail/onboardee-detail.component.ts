@@ -43,7 +43,7 @@ export class OnboardeeDetailComponent implements OnInit {
   fetchById(id: any): any {
     this.onboardeeService.fetchOnboardees_byId(parseInt(id)).subscribe((data: any) => {
       if (data == null) {
-        this.router.navigate(['onboardees'])
+        this.router.navigate(['onboardees/'])
       }
       else {
         var skills = []
@@ -98,7 +98,7 @@ export class OnboardeeDetailComponent implements OnInit {
       })
     }
     else {
-      this.router.navigate(["onboardees"])
+      this.router.navigate(["onboardees/"])
     }
 
   }

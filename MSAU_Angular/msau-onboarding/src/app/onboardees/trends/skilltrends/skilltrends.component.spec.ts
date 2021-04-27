@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { OnboardeeService } from '../../onboardee.service';
 
 import { SkilltrendsComponent } from './skilltrends.component';
 
@@ -8,9 +10,12 @@ describe('SkilltrendsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SkilltrendsComponent ]
+      declarations: [SkilltrendsComponent],
+      providers: [
+        { provide: OnboardeeService, useClass: OnboardeeServiceStub }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -23,3 +28,9 @@ describe('SkilltrendsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class OnboardeeServiceStub {
+  fetchSkills(): any {
+    return of([])
+  }
+}

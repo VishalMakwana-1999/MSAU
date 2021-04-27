@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { OnboardeeService } from '../../onboardee.service';
 
 import { ManagertrendsComponent } from './managertrends.component';
 
@@ -8,9 +10,12 @@ describe('ManagertrendsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManagertrendsComponent ]
+      declarations: [ManagertrendsComponent],
+      providers: [
+        { provide: OnboardeeService, useClass: OnboardeeServiceStub }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -23,3 +28,9 @@ describe('ManagertrendsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class OnboardeeServiceStub {
+  fetchManagerTrends(): any {
+    return of([]);
+  }
+}

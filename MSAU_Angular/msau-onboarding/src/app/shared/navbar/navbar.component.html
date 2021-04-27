@@ -11,13 +11,13 @@
                 <a class="nav-link" routerLink="/">Home</a>
             </li>
             <li *ngIf="loggedIn" class="nav-item active">
-                <a class="nav-link" routerLink="/onboardees">Dashboard</a>
+                <a class="nav-link" routerLink="/onboardees/">Dashboard</a>
             </li>
             <li *ngIf="!loggedIn" class="nav-item active">
-                <a class="nav-link" routerLink="/login">Sign In</a>
+                <a class="nav-link" routerLink="/login/">Sign In</a>
             </li>
             <li *ngIf="loggedIn" class="nav-item active">
-                <a class="nav-link" routerLink="/login" (click)="logOut()">Sign Out</a>
+                <a class="nav-link" routerLink="/login/" (click)="logOut()">Sign Out</a>
             </li>
         </ul>
     </div>

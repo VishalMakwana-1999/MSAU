@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OnboardeeService } from '../onboardee.service';
 
 @Component({
   selector: 'app-onboardee-card',
@@ -9,7 +8,7 @@ import { OnboardeeService } from '../onboardee.service';
 export class OnboardeeCardComponent implements OnInit {
   @Input() onboardee: any;
   @Input() deleteId: any
-  constructor(private onboardeeService: OnboardeeService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
