@@ -25,13 +25,12 @@ export class AddOnboardeeComponent implements OnInit {
   fetchManagers(): void {
     this.onboardeeService.fetchManagers().subscribe((man: any) => {
       this.managers = man;
-      console.log(man)
     })
   }
 
   onboardeeForm = this.fb.group({
-    fname: ['', Validators.required],
-    lname: ['', Validators.required],
+    fname: ['', [Validators.required, Validators.minLength(2)]],
+    lname: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     dob: ['', Validators.required],
@@ -52,14 +51,12 @@ export class AddOnboardeeComponent implements OnInit {
     this.loading = true;
     var values = this.onboardeeForm.value
     var skillList = [];
-    console.log(values.skills)
     for (var index in values.skills) {
       skillList.push({
         'skillName': values.skills[index],
         'level': values.skillLevel[index]
       })
     }
-    console.log(skillList)
     var ob: OnboardeeModel = {
       demandId: null,
       fname: values.fname,
@@ -78,18 +75,12 @@ export class AddOnboardeeComponent implements OnInit {
       }
     }
     this.onboardeeService.createOnboardee(ob).subscribe((data: any) => {
-      console.log(data)
       this.response = {
         'Status': data.Status,
         'Message': data.Message
       }
       this.loading = false
     });
-    //this.response = {
-    //'Status': 200,
-    //'Message': "Success"
-    //}
-    // this.loading = false
   }
   goToDashboard(): any {
     if (this.response.Status == 200) {

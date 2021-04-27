@@ -32,11 +32,11 @@ export class OnboardeeService {
   }
 
   searchOnboardee(name: string): any {
-    return this.http.get(`api/fetch_onboardees/search/${name}`)
+    return this.http.get(`/api/fetch_onboardees/search/${name}`)
   }
 
   fetchSkills(): any {
-    return this.http.get("api/skills")
+    return this.http.get("/api/skills")
   }
 
   fetchLocation(): any {

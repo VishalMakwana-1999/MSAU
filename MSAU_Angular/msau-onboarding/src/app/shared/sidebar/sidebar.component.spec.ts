@@ -1,5 +1,7 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 import { SidebarComponent } from './sidebar.component';
 
@@ -9,7 +11,7 @@ describe('SidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SidebarComponent],
+      declarations: [SidebarComponent, MockNavComponent],
       imports: [RouterTestingModule]
     })
       .compileComponents();
@@ -32,3 +34,10 @@ describe('SidebarComponent', () => {
     expect(newtoggle).toBe(!toggle)
   })
 });
+
+@Component({
+  selector: 'app-navbar',
+  template: ''
+})
+class MockNavComponent {
+}

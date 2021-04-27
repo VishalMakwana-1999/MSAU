@@ -42,8 +42,8 @@ export class OnboardeeDetailComponent implements OnInit {
   })
   fetchById(id: any): any {
     this.onboardeeService.fetchOnboardees_byId(parseInt(id)).subscribe((data: any) => {
-      if (data == null) {
-        this.router.navigate(['onboardees/'])
+      if (data == null || data == {}) {
+        this.router.navigate(['onboardees'])
       }
       else {
         var skills = []

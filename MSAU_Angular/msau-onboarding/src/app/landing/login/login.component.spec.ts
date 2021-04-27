@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginService } from 'src/app/core/login/login.service';
+import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 import { LoginComponent } from './login.component';
 
@@ -12,7 +13,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [LoginComponent, NavbarComponent],
       imports: [RouterTestingModule.withRoutes([
         { path: 'onboardees', component: DummyComponent }
       ])],
@@ -40,10 +41,7 @@ describe('LoginComponent', () => {
     const buttonDes = fixture.debugElement.query(By.css("button"))
     const nativeButton: HTMLButtonElement = buttonDes.nativeElement
     nativeButton.click();
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(component.loggedIn).toBeTrue()
-    })
+    expect(component.loggedIn).toBeTruthy()
   })
 });
 @Component({ template: '' })

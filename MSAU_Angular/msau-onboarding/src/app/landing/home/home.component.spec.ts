@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoginService } from 'src/app/core/login/login.service';
 import { Location } from "@angular/common"
 import { HomeComponent } from './home.component';
+import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,7 +13,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+      declarations: [HomeComponent, NavbarComponent],
       imports: [RouterTestingModule.withRoutes([
         { path: 'login', component: DummyComponent }
       ])],

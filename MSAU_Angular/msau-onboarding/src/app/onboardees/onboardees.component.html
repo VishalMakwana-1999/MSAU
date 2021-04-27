@@ -35,7 +35,7 @@
             </tr>
         </thead>
 
-        <tr *ngFor="let onboardee of onboardee_list">
+        <tr class="table-items-list" *ngFor="let onboardee of onboardee_list">
             <td><i class="fa fa-user-circle-o"></i></td>
             <td>{{onboardee.fname}} {{onboardee.lname}}</td>
             <td>{{onboardee.email}}</td>
@@ -49,7 +49,7 @@
     <div id="products" class="row view-group mt-5">
         <div *ngFor="let onboardee of onboardee_list;" class="item col-xs-6 col-xl-6 grid-group-item">
 
-            <app-onboardee-card [onboardee]="onboardee" [deleteId]="deleteById"></app-onboardee-card>
+            <app-onboardee-card [Input_onboardee]="onboardee" [deleteId]="deleteById"></app-onboardee-card>
 
         </div>
 

@@ -6,11 +6,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./onboardee-card.component.css']
 })
 export class OnboardeeCardComponent implements OnInit {
-  @Input() onboardee: any;
+  @Input() Input_onboardee: any;
+  onboardee: any;
   @Input() deleteId: any
   constructor() { }
 
   ngOnInit(): void {
+    this.onboardee = this.Input_onboardee;
   }
   deleteById(id: number) {
     this.deleteId(id);
