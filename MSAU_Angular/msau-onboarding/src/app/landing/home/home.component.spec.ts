@@ -43,7 +43,7 @@ describe('HomeComponent', () => {
     expect(buttonDes.length >= 1).toBeTruthy()
   })
 
-  it('should naviagte to / before button click', () => {
+  it('should navigate to / before button click', () => {
     const location = TestBed.inject(Location)
     expect(location.path()).toBe("");
   })

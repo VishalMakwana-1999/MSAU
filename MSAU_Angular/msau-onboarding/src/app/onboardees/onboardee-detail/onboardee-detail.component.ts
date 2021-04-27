@@ -119,7 +119,6 @@ export class OnboardeeDetailComponent implements OnInit {
         'level': values.skillLevel[index]
       })
     }
-    console.log(skillList)
     var ob: OnboardeeModel = {
       demandId: this.onboardee.demandId,
       fname: values.fname,

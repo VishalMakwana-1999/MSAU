@@ -13,7 +13,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.url = this.router.url.split("/")[1];
     this.fullurl = this.router.url;
-    console.log(this.router.url)
   }
   toggleMenu(): void {
     this.toggle = !this.toggle

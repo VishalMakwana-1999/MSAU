@@ -13,12 +13,12 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private loginService: LoginService) { }
   ngOnInit(): void {
     if (this.loginService.alreadyLoggedIn()) {
-      this.router.navigate(['onboardees'])
+      this.router.navigate(['/onboardees/'])
     }
   }
   ngDoCheck(): void {
     if (this.loginService.alreadyLoggedIn()) {
-      this.router.navigate(['onboardees'])
+      this.router.navigate(['/onboardees/'])
     }
   }
   signInWithGoogle(): any {

@@ -24,4 +24,11 @@ describe('SidebarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle sidebar on click', () => {
+    const toggle = component.toggle;
+    component.toggleMenu();
+    const newtoggle = component.toggle;
+    expect(newtoggle).toBe(!toggle)
+  })
 });

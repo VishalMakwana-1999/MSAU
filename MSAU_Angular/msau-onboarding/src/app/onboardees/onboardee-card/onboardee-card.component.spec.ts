@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { OnboardeeCardComponent } from './onboardee-card.component';
 
@@ -8,9 +9,9 @@ describe('OnboardeeCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OnboardeeCardComponent ]
+      declarations: [OnboardeeCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +23,5 @@ describe('OnboardeeCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
