@@ -16,7 +16,6 @@ export class LoginService {
   }
   signInWithGoogle(): any {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
-      console.log(res);
       localStorage.setItem("token", res.idToken);
     })
   }
