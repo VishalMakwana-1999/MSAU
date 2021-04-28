@@ -81,6 +81,7 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
         if (rown>0){
             map.put("Status",204);
             map.put("Message","Another Onboardee has the same email");
+            logger.warn("Update Failed since email already present");
             return map;
         }
         jdbcTemplate.update("UPDATE onboardee set fname=?,lname=?,startDate=?,bgcStatus=?,managerId=?,location=?,etaCompletion=?,email=?,dob=?,onBoardStatus=?" +

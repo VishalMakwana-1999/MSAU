@@ -40,7 +40,6 @@ export class OnboardeesComponent implements OnInit {
     })
   }
   deleteById(id: number): any {
-    this.onboardee_list = [];
     this.onboardeeService.deleteOnboardee_byId(id).subscribe((data: any) => {
       console.log(data)
       this.update()

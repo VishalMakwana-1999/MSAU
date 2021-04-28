@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label>Manager</label>
                                 <select class="form-control" formControlName="managerId">
-                                    <option selected disabled>Select Manager</option>
+                                    <option selected value="">Select Manager</option>
                                     <option *ngFor="let man of managers" value="{{man.managerId}}"> {{man.managerFName}}
                                         {{man.managerLName}}
                                     </option>
