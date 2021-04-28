@@ -17,6 +17,10 @@ input.ng-touched.ng-invalid {
   border:1px solid red;
 }
 
+select.ng-touched.ng-invalid {
+  border:1px solid red;
+}
+
 .spinner-border{
   position: absolute;
   height: 50px;

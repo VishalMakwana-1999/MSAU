@@ -41,11 +41,11 @@ export class AddOnboardeeComponent implements OnInit {
     onboardStatus: ['', Validators.required],
     etaCompletion: ['', Validators.required],
     skills: this.fb.array([
-      this.fb.control('')
-    ], Validators.required),
+      this.fb.control('', Validators.required)
+    ]),
     skillLevel: this.fb.array([
-      this.fb.control('')
-    ], Validators.required)
+      this.fb.control('', Validators.required)
+    ])
   })
   onSubmit(): any {
     this.loading = true;

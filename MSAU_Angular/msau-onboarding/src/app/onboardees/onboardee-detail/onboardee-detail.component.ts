@@ -35,8 +35,7 @@ export class OnboardeeDetailComponent implements OnInit {
     bgcStatus: ['', Validators.required],
     onboardStatus: ['', Validators.required],
     etaCompletion: ['', Validators.required],
-    skills: this.fb.array([
-    ]),
+    skills: this.fb.array([]),
     skillLevel: this.fb.array([
     ])
   })

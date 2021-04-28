@@ -101,8 +101,9 @@
                                         Level:
                                     </label>
                                     <select class="form-control" [formControlName]="i">
-                                        <select selected>Select Level</select>
-                                        <option *ngFor="let level of levels" [selected]="level==levels[0]"> {{level}}
+                                        <option selected value="">Select Level
+                                        </option>
+                                        <option *ngFor="let level of levels"> {{level}}
                                         </option>
                                     </select>
                                 </div>

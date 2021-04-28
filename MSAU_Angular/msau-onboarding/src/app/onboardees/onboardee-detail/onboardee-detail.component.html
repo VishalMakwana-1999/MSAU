@@ -112,7 +112,8 @@
                                     </label>
                                     <input *ngIf="!edit" class="form-control" type="text" [formControlName]="i"
                                         readonly>
-                                    <select *ngIf="edit" class="form-control" [formControlName]="i">
+                                    <select *ngIf="edit" class="form-control" [formControlName]="i" required>
+                                        <option value="">Select Level</option>
                                         <option *ngFor="let level of levels" [selected]="level==skilllevels[i]">
 
                                             {{level}}
