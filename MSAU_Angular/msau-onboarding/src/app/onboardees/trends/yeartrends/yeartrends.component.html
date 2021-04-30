@@ -1,0 +1,6 @@
+<div class="card p-3 my-3 text-color-change">
+    <i *ngIf="!chartOptions" class="spinner-border"></i>
+    <apx-chart *ngIf="chartOptions" [series]="chartOptions.series" [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions" [xaxis]="chartOptions.xaxis"
+        [title]="chartOptions.title" [colors]="chartOptions.colors"></apx-chart>
+</div>

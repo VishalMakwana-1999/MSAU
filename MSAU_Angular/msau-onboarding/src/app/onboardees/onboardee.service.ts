@@ -45,4 +45,8 @@ export class OnboardeeService {
   fetchManagerTrends(): any {
     return this.http.get("/api/managerTrends")
   }
+
+  fetchYearTrends(): any {
+    return this.http.get("/api/yearTrends")
+  }
 }

@@ -72,4 +72,10 @@ public class OnBoardeeController {
         logger.info("Manager Trends Requested");
         return onBoardeeRepository.fetchManagerTrends();
     }
+
+    @GetMapping("/api/yearTrends")
+    public HashMap<String, Object> fetchYearTrends(){
+        logger.info("Year Trends Requested");
+        return onBoardeeRepository.fetchYearTrends();
+    }
 }

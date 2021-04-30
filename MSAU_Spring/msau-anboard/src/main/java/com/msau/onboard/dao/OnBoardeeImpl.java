@@ -290,6 +290,24 @@ public class OnBoardeeImpl implements OnBoardeeRepository{
         return map;
     }
 
+    @Override
+    public HashMap<String, Object> fetchYearTrends() {
+        HashMap<String,Object> map= new HashMap<>();
+        ArrayList<String> year= new ArrayList<>();
+        ArrayList<Integer> count=new ArrayList<>();
+        jdbcTemplate.query("Select left(startDate,4) as year, count(*) as count from onboardee group by year ", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                year.add(resultSet.getString("year"));
+                count.add(resultSet.getInt("count"));
+                return null;
+            }
+        });
+        map.put("year",year);
+        map.put("count",count);
+        logger.info("Year Trends Fetched");
+        return map;
+    }
 
 
 }

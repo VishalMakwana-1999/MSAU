@@ -26,7 +26,7 @@ export class OnboardeesComponent implements OnInit {
     this.loading = true;
     this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
       this.onboardee_list = data;
-      console.log(data)
+
       this.loading = false;
     })
 
@@ -35,13 +35,13 @@ export class OnboardeesComponent implements OnInit {
     this.loading = true;
     this.onboardeeService.fetchOnboardees().subscribe((data: any) => {
       this.onboardee_list = data;
-      console.log(data)
+
       this.loading = false;
     })
   }
   deleteById(id: number): any {
     this.onboardeeService.deleteOnboardee_byId(id).subscribe((data: any) => {
-      console.log(data)
+
       this.update()
     });
 

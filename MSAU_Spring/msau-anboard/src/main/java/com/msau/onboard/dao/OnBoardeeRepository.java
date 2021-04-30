@@ -16,4 +16,5 @@ public interface OnBoardeeRepository {
     HashMap<String,Object> fetchSkills();
     HashMap<String,Object> fetchLocationTrends();
     HashMap<String,Object> fetchManagerTrends();
+    HashMap<String,Object> fetchYearTrends();
 }

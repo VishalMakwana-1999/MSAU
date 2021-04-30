@@ -21,6 +21,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SkilltrendsComponent } from './onboardees/trends/skilltrends/skilltrends.component';
 import { LocationtrendsComponent } from './onboardees/trends/locationtrends/locationtrends.component';
 import { ManagertrendsComponent } from './onboardees/trends/managertrends/managertrends.component';
+import { YeartrendsComponent } from './onboardees/trends/yeartrends/yeartrends.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ManagertrendsComponent } from './onboardees/trends/managertrends/manage
     SkilltrendsComponent,
     LocationtrendsComponent,
     ManagertrendsComponent,
+    YeartrendsComponent,
   ],
   imports: [
     BrowserModule,
