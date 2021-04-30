@@ -101,6 +101,19 @@ describe('OnboardeeService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(dummy)
   })
+  it('should retrieve Year Trends', () => {
+    const dummy = {
+      year: ['2020', '2021'],
+      count: [10, 20]
+    }
+    service.fetchYearTrends().subscribe((trend: any) => {
+      expect(trend).toEqual(dummy)
+      expect(trend.year.length).toBe(trend.count.length)
+    })
+    const req = httpMock.expectOne("/api/yearTrends")
+    expect(req.request.method).toBe('GET');
+    req.flush(dummy)
+  })
   it('should find an onboardee by id', () => {
     const dummy = { demandId: 12, fname: 'Vishal', lname: 'Makwana' }
     service.fetchOnboardees_byId(12)

@@ -26,9 +26,6 @@ export class YeartrendsComponent implements OnInit {
           type: "line",
           height: 300
         },
-        fill: {
-          colors: ['#173f5f']
-        },
         colors: ['#173f5f'],
         plotOptions: {
           bar: {
