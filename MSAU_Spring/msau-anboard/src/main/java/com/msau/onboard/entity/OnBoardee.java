@@ -22,4 +22,5 @@ public class OnBoardee {
     MSManager manager;
     Skills skills;
     private String phone;
+    public OnBoardee(int demandId,String fname, String lname){}
 }
