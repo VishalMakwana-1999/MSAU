@@ -12,4 +12,5 @@ public class Skill {
     private int demandId;
     private String skillName;
     private String level;
+    public Skill(String skillName,String level){}
 }

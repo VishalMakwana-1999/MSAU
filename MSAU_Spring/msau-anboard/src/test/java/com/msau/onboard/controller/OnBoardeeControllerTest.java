@@ -1,6 +1,5 @@
 package com.msau.onboard.controller;
 
-import com.msau.onboard.dao.OnBoardeeImpl;
 import com.msau.onboard.dao.OnBoardeeRepository;
 import com.msau.onboard.entity.MSManager;
 import com.msau.onboard.entity.OnBoardee;
